@@ -8,17 +8,17 @@
   margin: 3rem 1rem 1rem;
 }
 
-.waffleInput {
+.waffleInputContainer {
   display: grid;
   justify-content: center;
-  label {
-    display: grid;
-    justify-content: center;
-    padding-bottom: 0.5rem;
-  }
-  input {
-    margin-bottom: 1rem;
-  }
+}
+.waffleInputLabel {
+  display: grid;
+  justify-content: center;
+  padding-bottom: 0.5rem;
+}
+.waffleInput {
+  margin-bottom: 1rem;
 }
 
 .cell {
@@ -38,10 +38,10 @@
 .steps {
   max-width: 20em;
   display: grid;
-  div {
-    display: grid;
-    justify-content: center;
-  }
+}
+.step {
+  display: grid;
+  justify-content: center;
 }
 .steps .selected {
   background-color: #d17724;
@@ -67,8 +67,9 @@
   flex-direction: row;
   gap: 1rem;
   width: 19rem;
-  button {
-    flex: auto;
-    height: 5rem;
-  }
+
+}
+.nextprevbutton {
+  flex: auto;
+  height: 5rem;
 }

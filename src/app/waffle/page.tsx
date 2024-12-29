@@ -157,12 +157,16 @@ export default function Waffle() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <div className={styles.waffleInput}>
-          <label htmlFor="puzzleInput">
+        <div className={styles.waffleInputContainer}>
+          <label
+            className={styles.waffleInputLabel}
+            htmlFor="puzzleInput"
+          >
             Puzzle
           </label>
           <input
             id="puzzleInput"
+            className={styles.waffleInput}
             value={puzzle}
             onChange={e => {
               setPuzzle(e.target.value);
@@ -179,11 +183,15 @@ export default function Waffle() {
             }}
           >
           </input>
-          <label htmlFor="solutionInput">
+          <label
+            className={styles.waffleInputLabel}
+            htmlFor="solutionInput"
+          >
             Solution
           </label>
           <input
             id="solutionInput"
+            className={styles.waffleInput}
             value={solution}
             onChange={e => {
               setSolution(e.target.value)
@@ -203,6 +211,7 @@ export default function Waffle() {
         <div className={styles.buttonBox}>
           <button
             disabled={cycleIndex <= 0}
+            className={styles.nextprevbutton}
             onClick={() => {
               prev();
             }}
@@ -211,6 +220,7 @@ export default function Waffle() {
           </button>
           <button
             disabled={cycleIndex >= cycleSteps.length - 1}
+            className={styles.nextprevbutton}
             onClick={() => {
               next();
             }}
@@ -225,7 +235,7 @@ export default function Waffle() {
               (item: number[], index: number) =>
                 <div
                   key={`step-${index}`}
-                  className={index === cycleIndex ? styles.selected : ''}
+                  className={`${index === cycleIndex ? styles.selected : ''} ${styles.step}`}
                 >
                   {`${gridCycleMapping[item[0]]} - ${gridCycleMapping[item[1]]}`}
                 </div>
