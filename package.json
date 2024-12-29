@@ -1,22 +1,30 @@
 {
-  "name": "jdevdevdev.github.io",
+  "name": "wafflesolver-front",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "build": "next build"
+    "test": "vitest"
   },
   "dependencies": {
-    "@types/node": "18.14.6",
-    "@types/react": "18.0.28",
-    "@types/react-dom": "18.0.11",
-    "eslint": "8.35.0",
-    "eslint-config-next": "13.2.3",
-    "next": "13.2.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "typescript": "4.9.5"
+    "lodash": "^4.17.21",
+    "next": "15.1.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@types/brotli": "^1.3.4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "brotli": "^1.3.3",
+    "eslint": "^9",
+    "eslint-config-next": "15.1.2",
+    "typescript": "^5",
+    "vitest": "^2.1.8"
   }
 }

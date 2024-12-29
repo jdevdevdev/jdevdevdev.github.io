@@ -1,0 +1,74 @@
+.page {
+  min-height: 100vh;
+}
+.main {
+  display: grid;
+  gap: 1rem;
+  justify-content: center;
+  margin: 3rem 1rem 1rem;
+}
+
+.waffleInput {
+  display: grid;
+  justify-content: center;
+  label {
+    display: grid;
+    justify-content: center;
+    padding-bottom: 0.5rem;
+  }
+  input {
+    margin-bottom: 1rem;
+  }
+}
+
+.cell {
+  width: 3rem;
+  height: 3rem;
+  background-color: #3b88e9;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell.swapped {
+  background-color: #d17724;
+}
+
+.steps {
+  max-width: 20em;
+  display: grid;
+  div {
+    display: grid;
+    justify-content: center;
+  }
+}
+.steps .selected {
+  background-color: #d17724;
+}
+
+.boardRow {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  height: 3rem;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.boardGrid {
+  display: grid;
+  gap: 1rem;
+  width: 19rem
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  width: 19rem;
+  button {
+    flex: auto;
+    height: 5rem;
+  }
+}
