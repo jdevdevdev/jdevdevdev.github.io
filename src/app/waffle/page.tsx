@@ -1,8 +1,10 @@
 "use client"
 import styles from "./page.module.css";
-import Cell from "./cell";
-import { useState, useMemo, useCallback, PropsWithChildren } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { findMinCycle } from "./findMinCycle";
+import { RenderGrid } from "./RenderGrid";
+import { objectEquals } from "./objectEquals";
+import { swap } from "./swap";
 
 type puzzleItem = {
   letter: string,
@@ -11,80 +13,6 @@ type puzzleItem = {
 }
 
 const gridCycleMapping = ["A1", "B1", "C1", "D1", "E1", "A2", "C2", "E2", "A3", "B3", "C3", "D3", "E3", "A4", "C4", "E4", "A5", "B5", "C5", "D5", "E5"]
-
-const objectEquals = <T extends object>(obj1: T, obj2: T): boolean => {
-  if (typeof obj1 !== 'object' || typeof obj2 !== 'object') return false;
-
-  const keys1 = Object.keys(obj1) as (keyof T)[];
-  const keys2 = Object.keys(obj2) as (keyof T)[];
-
-  if (keys1.length !== keys2.length) return false;
-
-  for (const key of keys1) {
-    const val1 = obj1[key];
-    const val2 = obj2[key];
-
-    if (typeof val1 === 'object' && typeof val2 === 'object' && val1 !== null && val2 !== null) {
-      if (!objectEquals(val1, val2)) return false;
-    } else if (val1 !== val2) {
-      return false;
-    }
-  }
-
-  return true;
-}
-const RenderRows = ({ children }: PropsWithChildren) => {
-  return <div className={styles.boardRow}>{children}</div>;
-}
-
-const splitArray = (arr: puzzleItem[]) => {
-  const result = [];
-  let index = 0;
-  const _arr = arr.length < 21 ? [...arr, ...Array(21 - arr.length).fill({ letter: '', index: 99, swap: false })] : arr.slice(0, 21);
-
-  while (index < _arr.length) {
-    if (result.length % 2 === 0) {
-      result.push(
-        <RenderRows key={`row-${index}`}>
-          {_arr.slice(index, index + 5)
-            .map(
-              (item: puzzleItem, index: number) =>
-                <Cell key={`cell-${index}`} swapped={item.swap}>
-                  {item.letter}
-                </Cell>
-            )
-          }
-        </RenderRows>
-      );
-      index += 5;
-    } else {
-      result.push(
-        <RenderRows key={`row-${index}`}>
-          {_arr.slice(index, index + 3)
-            .map(
-              (item: puzzleItem, index: number) =>
-                <Cell key={`cell-${index}`} swapped={item.swap}>
-                  {item.letter}
-                </Cell>
-            )
-          }
-        </RenderRows>
-      );
-      index += 3;
-    }
-  }
-  return result;
-}
-
-const swap = (puzzleState: puzzleItem[], swapStep: number[]): puzzleItem[] => {
-  const _puzzleState = [...puzzleState];
-  const temp = _puzzleState[swapStep[0]];
-  _puzzleState[swapStep[0]] = _puzzleState[swapStep[1]];
-  _puzzleState[swapStep[1]] = temp;
-  _puzzleState[swapStep[0]].swap = true;
-  _puzzleState[swapStep[1]].swap = true;
-  return _puzzleState;
-}
 
 export default function Waffle() {
   const [puzzle, setPuzzle] = useState<string>('CACIPWTLMNSLERAILTUEE');
@@ -212,7 +140,7 @@ export default function Waffle() {
         </div>
 
         <div className={styles.boardGrid}>
-          {splitArray(puzzleState)}
+          <RenderGrid  arr={puzzleState}></RenderGrid>
         </div>
 
         <div>
