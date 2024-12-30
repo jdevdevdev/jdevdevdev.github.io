@@ -136,22 +136,32 @@ export default function Waffle() {
     return result;
   }, [cycles])
 
+  const stepCountTracker = useMemo(() => {
+    if(cycleIndex < 0) {
+      return 0;
+    }
+    if(cycleIndex >= cycleSteps.length) {
+      return cycleSteps.length
+    }
+    return cycleIndex + 1
+  },[cycleIndex, cycleSteps])
+
   const next = useCallback(() => {
+    setPuzzleState(puzzleState.map((item) => { item.swap = false; return item }));
     const nextCycleIndex = cycleIndex + 1;
-    if (nextCycleIndex < cycleSteps.length) {
-      setPuzzleState(puzzleState.map((item) => { item.swap = false; return item }));
-      setCycleIndex(nextCycleIndex);
+    if (nextCycleIndex < cycleSteps.length && cycleSteps[nextCycleIndex]) {
       setPuzzleState(swap(puzzleState, cycleSteps[nextCycleIndex]))
     }
+    setCycleIndex(nextCycleIndex);
   }, [cycleIndex, puzzleState, cycleSteps])
 
   const prev = useCallback(() => {
+    setPuzzleState(puzzleState.map((item) => { item.swap = false; return item }));
     const nextCycleIndex = cycleIndex - 1;
-    if (nextCycleIndex >= 0) {
-      setPuzzleState(puzzleState.map((item) => { item.swap = false; return item }));
-      setPuzzleState(swap(puzzleState, cycleSteps[nextCycleIndex]))
-      setCycleIndex(nextCycleIndex);
+    if (cycleIndex >= -1 && cycleSteps[cycleIndex]) {
+      setPuzzleState(swap(puzzleState, cycleSteps[cycleIndex]))
     }
+    setCycleIndex(nextCycleIndex);
   }, [cycleIndex, puzzleState, cycleSteps])
 
   return (
@@ -206,11 +216,11 @@ export default function Waffle() {
         </div>
 
         <div>
-          Step: {cycleIndex < 0 ? 0 : cycleIndex + 1} / {cycleSteps.length}
+          Step: {stepCountTracker} / {cycleSteps.length}
         </div>
         <div className={styles.buttonBox}>
           <button
-            disabled={cycleIndex <= 0}
+            disabled={cycleIndex < -1}
             className={styles.nextprevbutton}
             onClick={() => {
               prev();
@@ -219,7 +229,7 @@ export default function Waffle() {
             {'<'}
           </button>
           <button
-            disabled={cycleIndex >= cycleSteps.length - 1}
+            disabled={cycleIndex >= cycleSteps.length}
             className={styles.nextprevbutton}
             onClick={() => {
               next();
