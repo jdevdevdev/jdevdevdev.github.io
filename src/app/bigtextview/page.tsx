@@ -7,8 +7,8 @@ export default function Page() {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    const hash = window.location.hash;
-    setText(hash);
+    const hash = window.location.hash ?? "";
+    setText(hash.replace(/^#/, ""));
   }, []);
 
   return(<div className={styles.BigTextView}>
