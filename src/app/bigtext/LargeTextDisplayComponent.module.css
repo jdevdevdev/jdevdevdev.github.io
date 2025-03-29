@@ -1,0 +1,11 @@
+.LargeTextDisplayComponent {
+  --maxFontSize: 20rem;
+  --minFontSize: 3rem;
+  font-size: clamp(var(--minFontSize), var(--viewportFontSize), var(--maxFontSize));
+  margin: .5rem;
+}
+.horizontal {
+  writing-mode: sideways-rl;
+  text-orientation: mixed;
+  word-wrap: break-word;
+}

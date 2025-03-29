@@ -8,7 +8,7 @@ export const findMinCycle = (source: string, target: string): number[][] => {
   finalCyclesInverse = findCycleInverse(source, target);
 
   return finalCycles.length < finalCyclesInverse.length ? finalCyclesInverse : finalCycles;
-}
+};
 
 const findCycle = (source: string, target: string): number[][] => {
   const puzzleLength = source.length;
@@ -31,7 +31,7 @@ const findCycle = (source: string, target: string): number[][] => {
     indexMap,
     puzzleLength
   );
-}
+};
 
 const findCycleInverse = (source: string, target: string): number[][] => {
   const puzzleLength = source.length;
@@ -54,7 +54,7 @@ const findCycleInverse = (source: string, target: string): number[][] => {
     indexMap,
     puzzleLength
   );
-}
+};
 
 const generateCycles = (
   source: string,
@@ -69,12 +69,12 @@ const generateCycles = (
     const cycles: number[][] = [];
     for (let i = 0; i < puzzleLength; i++) {
       if (source[i] == target[i]) {
-        continue
+        continue;
       }
       if (!visited[i]) {
         let j = i;
         const cycle: number[] = [];
-        const key: Record<string, boolean> = {}
+        const key: Record<string, boolean> = {};
         while (!visitedTemp[j] && !key[source[j]]) {
           key[source[j]] = true;
           visitedTemp[j] = true;
@@ -86,7 +86,7 @@ const generateCycles = (
             (element: cycleIndexItem): boolean => element.target == source[j] && !visited[element.index] && !!visitedTemp[element.index]
           );
           if (looped) {
-            j = looped.index
+            j = looped.index;
             cycles[i] = [...cycle];
           } else if (next) {
             j = next.index;
@@ -100,13 +100,13 @@ const generateCycles = (
       if (hold.length == 0 || c.length < hold.length) {
         hold = [...c];
       }
-    })
+    });
     hold.forEach(visit => {
       visited[visit] = true;
-    })
+    });
     if (hold.length) {
       finalCycles.push([...hold]);
     }
   }
   return finalCycles;
-}
+};

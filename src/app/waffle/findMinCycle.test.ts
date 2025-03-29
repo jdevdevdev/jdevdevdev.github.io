@@ -1,7 +1,7 @@
-import { expect, test, describe } from 'vitest'
-import decompress from 'brotli/decompress';
-import { findMinCycle } from '@/app/waffle/findMinCycle';
-import archive from '@/artifacts/archive.json';
+import { expect, test, describe } from "vitest";
+import decompress from "brotli/decompress";
+import { findMinCycle } from "@/app/waffle/findMinCycle";
+import archive from "@/artifacts/archive.json";
 
 const transpose = (cycles: number[][]) => {
   const result = [];
@@ -11,28 +11,28 @@ const transpose = (cycles: number[][]) => {
     }
   }
   return result;
-}
+};
 
 function swapLetters(str: string, index1: number, index2: number): string {
-  const charArray = str.split('');
+  const charArray = str.split("");
 
   if (index1 < 0 || index1 >= charArray.length || index2 < 0 || index2 >= charArray.length) {
-    throw new Error('Indexes are out of bounds');
+    throw new Error("Indexes are out of bounds");
   }
 
   const temp = charArray[index1];
   charArray[index1] = charArray[index2];
   charArray[index2] = temp;
 
-  return charArray.join('');
+  return charArray.join("");
 }
 
-describe('findMinCycle', () => {
+describe("findMinCycle", () => {
   const keys = Object.keys(archive);
 
   keys.map((key, index) => {
     const cypher: string = archive[key as keyof typeof archive];
-    const decodedItem = decompress(Buffer.from(cypher, 'base64'));
+    const decodedItem = decompress(Buffer.from(cypher, "base64"));
     const archiveItem = JSON.parse(new TextDecoder().decode(decodedItem));
     let puzzle = archiveItem.puzzle;
     const solution = archiveItem.solution;
@@ -41,12 +41,12 @@ describe('findMinCycle', () => {
     const steps = transpose(cycles);
     steps.forEach((step) => {
       puzzle = swapLetters(puzzle, step[0], step[1]);
-    })
-    test(`produces correct number of steps ${index} ${archiveItem.puzzle} ${solution}`, () => {
-      expect(steps.length).toEqual(10)
     });
-    test('produces the solution', () => {
-      expect(puzzle).toEqual(solution)
-    })
-  })
-})
+    test(`produces correct number of steps ${index} ${archiveItem.puzzle} ${solution}`, () => {
+      expect(steps.length).toEqual(10);
+    });
+    test("produces the solution", () => {
+      expect(puzzle).toEqual(solution);
+    });
+  });
+});

@@ -1,16 +1,16 @@
 import { Cell } from "./Cell";
-import { RenderRow } from "./RenderRow"
+import { RenderRow } from "./RenderRow";
 
 type puzzleItem = {
-    letter: string,
-    index: number,
-    swap: boolean,
+  letter: string,
+  index: number,
+  swap: boolean,
 }
 
 export const RenderGrid = ({ arr } : { arr : puzzleItem[]}) => {
   const result = [];
   let index = 0;
-  const _arr = arr.length < 21 ? [...arr, ...Array(21 - arr.length).fill({ letter: '', index: 99, swap: false })] : arr.slice(0, 21);
+  const _arr = arr.length < 21 ? [...arr, ...Array(21 - arr.length).fill({ letter: "", index: 99, swap: false })] : arr.slice(0, 21);
 
   while (index < _arr.length) {
     if (result.length % 2 === 0) {
@@ -44,4 +44,4 @@ export const RenderGrid = ({ arr } : { arr : puzzleItem[]}) => {
     }
   }
   return result;
-}
+};

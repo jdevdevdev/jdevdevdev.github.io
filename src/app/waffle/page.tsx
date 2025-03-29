@@ -1,6 +1,6 @@
-"use client"
+"use client";
 import styles from "./page.module.css";
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from "react";
 import { findMinCycle } from "./findMinCycle";
 import { RenderGrid } from "./RenderGrid";
 import { objectEquals } from "./objectEquals";
@@ -12,24 +12,24 @@ type puzzleItem = {
   swap: boolean,
 }
 
-const gridCycleMapping = ["A1", "B1", "C1", "D1", "E1", "A2", "C2", "E2", "A3", "B3", "C3", "D3", "E3", "A4", "C4", "E4", "A5", "B5", "C5", "D5", "E5"]
+const gridCycleMapping = ["A1", "B1", "C1", "D1", "E1", "A2", "C2", "E2", "A3", "B3", "C3", "D3", "E3", "A4", "C4", "E4", "A5", "B5", "C5", "D5", "E5"];
 
 export default function Waffle() {
-  const [puzzle, setPuzzle] = useState<string>('CACIPWTLMNSLERAILTUEE');
-  const [solution, setSolution] = useState<string>('CLUMPRNIAISLEWECLATTE');
+  const [puzzle, setPuzzle] = useState<string>("CACIPWTLMNSLERAILTUEE");
+  const [solution, setSolution] = useState<string>("CLUMPRNIAISLEWECLATTE");
   const [puzzleState, setPuzzleState] = useState<puzzleItem[]>(
-    'CACIPWTLMNSLERAILTUEE'
-      .split('')
+    "CACIPWTLMNSLERAILTUEE"
+      .split("")
       .map((letter: string, index: number): puzzleItem => ({
         letter,
         index,
         swap: false,
       }))
-  )
+  );
   const [cycleIndex, setCycleIndex] = useState<number>(-1);
 
   const cycles = useMemo(() => {
-    const _p = puzzle.split('').reduce(
+    const _p = puzzle.split("").reduce(
       (
         previousValue: Record<typeof puzzle[number], number>,
         currentValue: string,
@@ -38,7 +38,7 @@ export default function Waffle() {
           previousValue[currentValue] + 1 : 1;
         return previousValue;
       }, {});
-    const _s = solution.split('').reduce(
+    const _s = solution.split("").reduce(
       (
         previousValue: Record<typeof puzzle[number], number>,
         currentValue: string,
@@ -49,10 +49,10 @@ export default function Waffle() {
       }, {});
 
     if (puzzle.length === 21 && solution.length === 21 && objectEquals(_p, _s)) {
-      return findMinCycle(puzzle, solution)
+      return findMinCycle(puzzle, solution);
     }
     return [];
-  }, [puzzle, solution])
+  }, [puzzle, solution]);
 
   const cycleSteps = useMemo(() => {
     const result = [];
@@ -62,35 +62,35 @@ export default function Waffle() {
       }
     }
     return result;
-  }, [cycles])
+  }, [cycles]);
 
   const stepCountTracker = useMemo(() => {
     if(cycleIndex < 0) {
       return 0;
     }
     if(cycleIndex >= cycleSteps.length) {
-      return cycleSteps.length
+      return cycleSteps.length;
     }
-    return cycleIndex + 1
-  },[cycleIndex, cycleSteps])
+    return cycleIndex + 1;
+  },[cycleIndex, cycleSteps]);
 
   const next = useCallback(() => {
-    setPuzzleState(puzzleState.map((item) => { item.swap = false; return item }));
+    setPuzzleState(puzzleState.map((item) => { item.swap = false; return item; }));
     const nextCycleIndex = cycleIndex + 1;
     if (nextCycleIndex < cycleSteps.length && cycleSteps[nextCycleIndex]) {
-      setPuzzleState(swap(puzzleState, cycleSteps[nextCycleIndex]))
+      setPuzzleState(swap(puzzleState, cycleSteps[nextCycleIndex]));
     }
     setCycleIndex(nextCycleIndex);
-  }, [cycleIndex, puzzleState, cycleSteps])
+  }, [cycleIndex, puzzleState, cycleSteps]);
 
   const prev = useCallback(() => {
-    setPuzzleState(puzzleState.map((item) => { item.swap = false; return item }));
+    setPuzzleState(puzzleState.map((item) => { item.swap = false; return item; }));
     const nextCycleIndex = cycleIndex - 1;
     if (cycleIndex >= -1 && cycleSteps[cycleIndex]) {
-      setPuzzleState(swap(puzzleState, cycleSteps[cycleIndex]))
+      setPuzzleState(swap(puzzleState, cycleSteps[cycleIndex]));
     }
     setCycleIndex(nextCycleIndex);
-  }, [cycleIndex, puzzleState, cycleSteps])
+  }, [cycleIndex, puzzleState, cycleSteps]);
 
   return (
     <div className={styles.page}>
@@ -111,13 +111,13 @@ export default function Waffle() {
               setCycleIndex(-1);
               setPuzzleState(
                 e.target.value
-                  .split('')
+                  .split("")
                   .map((letter: string, index: number): puzzleItem => ({
                     letter,
                     index,
                     swap: false,
                   }))
-              )
+              );
             }}
           >
           </input>
@@ -132,7 +132,7 @@ export default function Waffle() {
             className={styles.waffleInput}
             value={solution}
             onChange={e => {
-              setSolution(e.target.value)
+              setSolution(e.target.value);
               setCycleIndex(-1);
             }}
           >
@@ -154,7 +154,7 @@ export default function Waffle() {
               prev();
             }}
           >
-            {'<'}
+            {"<"}
           </button>
           <button
             disabled={cycleIndex >= cycleSteps.length}
@@ -163,7 +163,7 @@ export default function Waffle() {
               next();
             }}
           >
-            {'>'}
+            {">"}
           </button>
         </div>
 
@@ -173,7 +173,7 @@ export default function Waffle() {
               (item: number[], index: number) =>
                 <div
                   key={`step-${index}`}
-                  className={`${index === cycleIndex ? styles.selected : ''} ${styles.step}`}
+                  className={`${index === cycleIndex ? styles.selected : ""} ${styles.step}`}
                 >
                   {`${gridCycleMapping[item[0]]} - ${gridCycleMapping[item[1]]}`}
                 </div>
@@ -182,5 +182,5 @@ export default function Waffle() {
         </div>
       </main>
     </div>
-  )
+  );
 }

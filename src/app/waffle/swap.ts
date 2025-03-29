@@ -6,4 +6,4 @@ export const swap = <T extends {swap: boolean}>(puzzleState: T[], swapStep: numb
   _puzzleState[swapStep[0]].swap = true;
   _puzzleState[swapStep[1]].swap = true;
   return _puzzleState;
-}
+};

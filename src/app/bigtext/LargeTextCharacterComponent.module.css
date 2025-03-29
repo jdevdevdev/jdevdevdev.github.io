@@ -1,0 +1,37 @@
+.LargeTextCharacterComponent {
+  font-family: var(--font-geist-mono);
+  position: relative;
+  white-space: pre-wrap;
+  display: inline-block;
+}
+.vertical::before {
+  font-size: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  content: attr(attr-index);
+  color: hotpink;
+}
+.horizontal::before {
+  font-size: 1rem;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  content: attr(attr-index);
+  color: hotpink;
+}
+.PrimaryDark,
+.SecondaryDark,
+.TertiaryDark {
+  background-color: #272727;
+}
+.SecondaryDark,
+.SecondaryLight {
+  color: #3a7ca5;
+}
+.TertiaryDark,
+.TertiaryLight {
+  color: #a53860;
+}
