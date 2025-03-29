@@ -1,0 +1,19 @@
+.fullscreen--close-vertical {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.fullscreen--close-horizontal {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+.page {
+  font-family: var(--font-geist-mono);
+}
+.BigTextConfig {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}

@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { LargeTextCharacterComponent } from "./LargeTextCharacterComponent";
-import styles from "./LargeTextDisplayComponent.module.css";
+import styles from "./index.module.css";
 type Props = {
   text: string,
   orientation?: string,
