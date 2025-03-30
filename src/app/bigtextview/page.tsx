@@ -7,7 +7,7 @@ export default function Page() {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    const hash = window.location.hash ?? "";
+    const hash = decodeURI(window.location.hash) ?? "";
     setText(hash.replace(/^#/, ""));
   }, []);
 
