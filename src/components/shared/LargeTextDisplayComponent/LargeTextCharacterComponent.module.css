@@ -4,6 +4,12 @@
   white-space: pre-wrap;
   display: inline-block;
 }
+.vertical {
+  padding-bottom: 1rem;
+}
+.horizontal {
+  padding-left: 1rem;
+}
 .vertical::before {
   font-size: 1rem;
   position: absolute;
