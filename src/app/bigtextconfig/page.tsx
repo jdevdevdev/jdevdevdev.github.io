@@ -5,7 +5,7 @@ import { LargeTextInputComponent } from "./LargeTextInputComponent";
 import { LargeButtonComponent } from "./LargeButtonComponent";
 import { LargeTextDisplayComponent } from "@/components/shared/LargeTextDisplayComponent";
 import { QrComponent } from "./QrComponent";
-import { FullscreenComponent } from "./FullscreenComponent";
+import { FullscreenModalComponent } from "./FullscreenModalComponent";
 import styles from "./page.module.css";
 export default function Page() {
   const [text, setText] = useState("");
@@ -56,9 +56,8 @@ export default function Page() {
         </div>
       </div>
     </div>
-    <FullscreenComponent
+    <FullscreenModalComponent
       isFullscreenValue={isFullscreen}
-      updateFullscreenState={setFullscreen}
       orientation={orientation}
     >
       {fullscreenContent === "text" ?
@@ -86,6 +85,6 @@ export default function Page() {
           <Image src="/cross.svg" alt="close" width={100} height={100} />
         </LargeButtonComponent>
       </div>
-    </FullscreenComponent>
+    </FullscreenModalComponent>
   </div>);
 };
