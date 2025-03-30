@@ -11,9 +11,30 @@
 .page {
   font-family: var(--font-geist-mono);
 }
+
 .BigTextConfig {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-items: center;
+}
+.BigTextConfig--ButtonPanel {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  justify-items: stretch;
+  grid-template-areas:
+    "qr . bigtext"
+    ". . ."
+    ". delete .";
+}
+
+.BigTextConfig--qr {
+  grid-area: qr;
+}
+.BigTextConfig--bigtext {
+  grid-area: bigtext;
+}
+.BigTextConfig--delete {
+  grid-area: delete;
 }

@@ -20,35 +20,40 @@ export default function Page() {
           setText(data);
         }}
       />
-      <div>
-        <LargeButtonComponent
-          buttonType={"clear"}
-          onClick={() => {
-            setFullscreenContent("qrcode");
-            setOrientation("vertical");
-            setFullscreen(true);
-          }}
-        >
-          <Image src="/qrcode.svg" alt="show qr code" width={100} height={100} />
-        </LargeButtonComponent>
-        <LargeButtonComponent
-          buttonType={"clear"}
-          onClick={() => {
-            setText("");
-          }}
-        >
-          <Image src="/trashcan.svg" alt="clear" width={100} height={100} />
-        </LargeButtonComponent>
-        <LargeButtonComponent
-          buttonType={"clear"}
-          onClick={() => {
-            setFullscreenContent("text");
-            setOrientation("vertical");
-            setFullscreen(true);
-          }}
-        >
-          <Image src="/fullscreen.svg" alt="fullscreen" width={100} height={100} />
-        </LargeButtonComponent>
+      <div className={styles["BigTextConfig--ButtonPanel"]}>
+        <div className={styles["BigTextConfig--qr"]}>
+          <LargeButtonComponent
+            buttonType={"clear"}
+            onClick={() => {
+              setFullscreenContent("qrcode");
+              setOrientation("vertical");
+              setFullscreen(true);
+            }}
+          >
+            <Image src="/qrcode.svg" alt="show qr code" width={100} height={100} />
+          </LargeButtonComponent>
+        </div>
+        <div className={styles["BigTextConfig--bigtext"]}>
+          <LargeButtonComponent
+            buttonType={"clear"}
+            onClick={() => {
+              setFullscreenContent("text");
+              setOrientation("vertical");
+              setFullscreen(true);
+            }}
+          >
+            <Image src="/fullscreen.svg" alt="fullscreen" width={100} height={100} />
+          </LargeButtonComponent>
+        </div>
+        <div className={styles["BigTextConfig--delete"]}>
+          <LargeButtonComponent
+            onClick={() => {
+              setText("");
+            }}
+          >
+            <Image src="/trashcan.svg" alt="clear" width={100} height={100} />
+          </LargeButtonComponent>
+        </div>
       </div>
     </div>
     <FullscreenComponent
