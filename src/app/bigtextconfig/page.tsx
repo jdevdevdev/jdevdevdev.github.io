@@ -13,7 +13,7 @@ export default function Page() {
   const [orientation, setOrientation] = useState<"horizontal" | "vertical" | undefined>("horizontal");
   const [isFullscreen, setFullscreen] = useState(false);
   return (<div className={styles.page}>
-    <div className={styles.BigTextConfig}>
+    <div className={[styles.BigTextConfig, isFullscreen ? styles.hidden : undefined].filter(item => item).join(" ")}>
       <LargeTextInputComponent
         value={text}
         onChange={(data: string) => {

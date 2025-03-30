@@ -11,7 +11,6 @@
 .page {
   font-family: var(--font-geist-mono);
 }
-
 .BigTextConfig {
   display: flex;
   flex-direction: column;
@@ -28,7 +27,9 @@
     ". . ."
     ". delete .";
 }
-
+.hidden {
+  display: none;
+}
 .BigTextConfig--qr {
   grid-area: qr;
 }
