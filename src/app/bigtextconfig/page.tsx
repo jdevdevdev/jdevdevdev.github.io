@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { LargeTextInputComponent } from "./LargeTextInputComponent";
 import { LargeButtonComponent } from "./LargeButtonComponent";
@@ -12,6 +12,12 @@ export default function Page() {
   const [fullscreenContent, setFullscreenContent] = useState("");
   const [orientation, setOrientation] = useState<"horizontal" | "vertical" | undefined>("horizontal");
   const [isFullscreen, setFullscreen] = useState(false);
+  
+  useEffect(() => {
+    const hash = decodeURI(window.location.hash) ?? "";
+    setText(hash.replace(/^#/, ""));
+  }, []);
+  
   return (<div className={styles.page}>
     <div className={[styles.BigTextConfig, isFullscreen ? styles.hidden : undefined].filter(item => item).join(" ")}>
       <LargeTextInputComponent
