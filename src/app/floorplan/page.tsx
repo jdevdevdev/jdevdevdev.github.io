@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from "react";
 
 export default function Page() {
-  const [position, setPosition] = useState<GeolocationPosition>();
+  const [positions, setPositions] = useState<GeolocationPosition[]>([]);
 
   useEffect(() => {
     const watchID = navigator.geolocation.watchPosition(
       (position) => {
-        setPosition(position);
+        setPositions([...positions, position]);
       },
       () => { },
       { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
@@ -16,9 +16,9 @@ export default function Page() {
     return () => {
       navigator.geolocation.clearWatch(watchID);
     }
-  }, [setPosition]);
+  }, [setPositions]);
 
   return (<div>
-    {JSON.stringify(position)}
+    {JSON.stringify(positions)}
   </div>);
 }
