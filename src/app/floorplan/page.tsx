@@ -8,8 +8,8 @@ export default function Page() {
   useEffect(() => {
     const watchID = navigator.geolocation.watchPosition(
       (position) => {
-        setPositions(() => [position, ...positions]);
-        setUpdateCount(() => updateCount + 1);
+        setPositions((prev) => [position, ...prev]);
+        setUpdateCount((currentCount) => currentCount + 1);
       },
       () => { },
       { enableHighAccuracy: true }
