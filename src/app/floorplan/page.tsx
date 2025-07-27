@@ -8,8 +8,8 @@ export default function Page() {
   useEffect(() => {
     const watchID = navigator.geolocation.watchPosition(
       (position) => {
-        setPositions([position, ...positions]);
-        setUpdateCount(updateCount + 1);
+        setPositions(() => [position, ...positions]);
+        setUpdateCount(() => updateCount + 1);
       },
       () => { },
       { enableHighAccuracy: true }
@@ -17,30 +17,30 @@ export default function Page() {
 
     return () => {
       navigator.geolocation.clearWatch(watchID);
-    }
-  }, [setPositions]);
+    };
+  }, [setPositions,setUpdateCount]);
 
   return (<div>
     <div>{updateCount}</div>
     {positions.map((pos, index) => {
-      const coords = pos.coords
+      const coords = pos.coords;
       const coordEntries: [keyof GeolocationCoordinates, number | null][] = [
-        ['latitude', coords.latitude],
-        ['longitude', coords.longitude],
-        ['altitude', coords.altitude],
-        ['accuracy', coords.accuracy],
-        ['altitudeAccuracy', coords.altitudeAccuracy],
-        ['heading', coords.heading],
-        ['speed', coords.speed],
+        ["latitude", coords.latitude],
+        ["longitude", coords.longitude],
+        ["altitude", coords.altitude],
+        ["accuracy", coords.accuracy],
+        ["altitudeAccuracy", coords.altitudeAccuracy],
+        ["heading", coords.heading],
+        ["speed", coords.speed],
       ];
 
-      return <div style={{border: "1px solid white", padding: "10px"}} key={index}>
+      return <div style={{ border: "1px solid white", padding: "10px" }} key={index}>
         {coordEntries.map(([key, value]) => (
           <div key={key}>
-            <strong>{key}:</strong> {value === null ? 'N/A' : value}
+            <strong>{key}:</strong> {value === null ? "N/A" : value}
           </div>
         ))}
-      </div>
+      </div>;
     })}
   </div>);
 }
