@@ -1,6 +1,6 @@
 // @ts-expect-error
 export function loadOpenCv(onloadCallback) {
-  const scriptId = 'opencvjs';
+  const scriptId = "opencvjs";
 
   if (document.getElementById(scriptId)) {
 // @ts-expect-error
@@ -10,20 +10,20 @@ export function loadOpenCv(onloadCallback) {
     return;
   }
 
-  const script = document.createElement('script');
+  const script = document.createElement("script");
   script.id = scriptId;
-  script.src = 'https://docs.opencv.org/4.12.0/opencv.js';
+  script.src = "https://docs.opencv.org/4.12.0/opencv.js";
   script.async = true;
   script.onload = () => {
-    console.log('OpenCV.js script loaded');
+    console.log("OpenCV.js script loaded");
     // @ts-expect-error
-    window.cv['onRuntimeInitialized'] = () => {
-      console.log('OpenCV.js runtime initialized');
+    window.cv["onRuntimeInitialized"] = () => {
+      console.log("OpenCV.js runtime initialized");
       onloadCallback();
     };
   };
   script.onerror = () => {
-    console.error('Failed to load OpenCV.js');
+    console.error("Failed to load OpenCV.js");
   };
 
   document.body.appendChild(script);

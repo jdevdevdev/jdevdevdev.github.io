@@ -1,6 +1,6 @@
-"use client"
-import React, { useRef, useState, useEffect } from 'react';
-import { loadOpenCv } from './components/LoadOpenCV';
+"use client";
+import React, { useRef, useState, useEffect } from "react";
+import { loadOpenCv } from "./components/LoadOpenCV";
 
 const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
   const canvasRef = useRef(null);
@@ -13,18 +13,18 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
 
   useEffect(() => {
     const main = async () => {
-      const pdfjs = (await import("pdfjs-dist"))
+      const pdfjs = (await import("pdfjs-dist"));
       pdfjs.GlobalWorkerOptions.workerSrc = new URL(
         "pdfjs-dist/build/pdf.worker.min.mjs",
         import.meta.url
-      ).toString()
+      ).toString();
       loadOpenCv(() => { setCVRead(true); });
-    }
+    };
     main();
   }, [fileUrl]);
   const handleFileChange = async (e: any) => {
     const file = e.target.files[0];
-    if (file && file.type === 'application/pdf') {
+    if (file && file.type === "application/pdf") {
       const reader = new FileReader();
       reader.onload = async function () {
 // @ts-expect-error
@@ -37,26 +37,26 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
           setNumPages(pdf.numPages);
           setPdfDoc(pdf);
           renderPage(pdf, pageNumber);
-        })
+        });
       };
       reader.readAsArrayBuffer(file);
     } else {
-      alert('Please upload a valid PDF file.');
+      alert("Please upload a valid PDF file.");
     }
   };
 // @ts-expect-error
   const detectQRCode = (canvas) => {
 // @ts-expect-error
-    const cv = window.cv
-    let src = cv.imread(canvas);
-    let qrDecoder = new cv.QRCodeDetector();
-    let decodedStrings = new cv.StringVector();
-    let points = new cv.Mat();
-    let straightQRCodes = new cv.MatVector();
-    let result = [];
+    const cv = window.cv;
+    const src = cv.imread(canvas);
+    const qrDecoder = new cv.QRCodeDetector();
+    const decodedStrings = new cv.StringVector();
+    const points = new cv.Mat();
+    const straightQRCodes = new cv.MatVector();
+    const result = [];
     try {
       const success = qrDecoder.detectAndDecodeMulti(src, decodedStrings, points, straightQRCodes);
-      console.log(success)
+      console.log(success);
       if (success) {
         for (let i = 0; i < decodedStrings.size(); i++) {
           const decodedText = decodedStrings.get(i);
@@ -116,7 +116,7 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
         setQrValue([...qrValue, "No QR code found."]);
       }
     } catch (err) {
-      console.error('QR detection error:', err);
+      console.error("QR detection error:", err);
       setQrValue([...qrValue, "Error detecting QR code."]);
     } finally {
       src.delete();
@@ -132,7 +132,7 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
     const viewport = page.getViewport({ scale: 1.5 });
     const canvas = canvasRef.current;
 // @ts-expect-error
-    const context = canvas.getContext('2d');
+    const context = canvas.getContext("2d");
 // @ts-expect-error
     canvas.height = viewport.height;
 // @ts-expect-error
