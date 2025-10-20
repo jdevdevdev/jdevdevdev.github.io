@@ -161,7 +161,7 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
   };
   const readAll = async () => {
     detectQRCode(canvasRef.current);
-      }
+  };
   return (
     <div>
       <input type="file" accept="application/pdf" onChange={handleFileChange} />
