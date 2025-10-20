@@ -22,7 +22,8 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
     };
     main();
   }, [fileUrl]);
-  const handleFileChange = async (e: any) => {
+  // @ts-expect-error todo 
+  const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file && file.type === "application/pdf") {
       const reader = new FileReader();
