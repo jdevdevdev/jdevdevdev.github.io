@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@types/pdfjs-dist':
-        specifier: ^2.10.378
-        version: 2.10.378
       jsqr:
         specifier: ^1.4.0
         version: 1.4.0
@@ -51,6 +48,9 @@ importers:
       '@types/node':
         specifier: ^22.18.8
         version: 22.18.8
+      '@types/pdfjs-dist':
+        specifier: ^2.10.378
+        version: 2.10.378
       '@types/react':
         specifier: ^19.2.0
         version: 19.2.0
