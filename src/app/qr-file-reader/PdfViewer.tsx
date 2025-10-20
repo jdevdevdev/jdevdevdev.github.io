@@ -27,11 +27,11 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
     if (file && file.type === "application/pdf") {
       const reader = new FileReader();
       reader.onload = async function () {
-// @ts-expect-error
+        // @ts-expect-error todo
         const typedArray = new Uint8Array(reader.result);
-// @ts-expect-error
+        // @ts-expect-error todo
         const loadingTask = pdfjsLib.getDocument({ data: typedArray });
-// @ts-expect-error
+        // @ts-expect-error todo
         loadingTask.promise.then(pdf => {
           pdfRef.current = pdf;
           setNumPages(pdf.numPages);
@@ -44,9 +44,9 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
       alert("Please upload a valid PDF file.");
     }
   };
-// @ts-expect-error
+  // @ts-expect-error todo
   const detectQRCode = (canvas) => {
-// @ts-expect-error
+    // @ts-expect-error todo
     const cv = window.cv;
     const src = cv.imread(canvas);
     const qrDecoder = new cv.QRCodeDetector();
@@ -125,17 +125,17 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
       straightQRCodes.delete();
     }
   };
-// @ts-expect-error
+  // @ts-expect-error todo
   const renderPage = async (pdf, num) => {
     const page = await pdf
       .getPage(num);
     const viewport = page.getViewport({ scale: 1.5 });
     const canvas = canvasRef.current;
-// @ts-expect-error
+    // @ts-expect-error todo
     const context = canvas.getContext("2d");
-// @ts-expect-error
+    // @ts-expect-error todo
     canvas.height = viewport.height;
-// @ts-expect-error
+    // @ts-expect-error todo
     canvas.width = viewport.width;
     const renderContext = {
       canvasContext: context,
