@@ -2,7 +2,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { loadOpenCv } from './components/LoadOpenCV';
 
-const PdfJsViewer = ({ fileUrl }) => {
+const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
   const canvasRef = useRef(null);
   const [numPages, setNumPages] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
@@ -22,13 +22,16 @@ const PdfJsViewer = ({ fileUrl }) => {
     }
     main();
   }, [fileUrl]);
-  const handleFileChange = async (e) => {
+  const handleFileChange = async (e: any) => {
     const file = e.target.files[0];
     if (file && file.type === 'application/pdf') {
       const reader = new FileReader();
       reader.onload = async function () {
+// @ts-expect-error
         const typedArray = new Uint8Array(reader.result);
+// @ts-expect-error
         const loadingTask = pdfjsLib.getDocument({ data: typedArray });
+// @ts-expect-error
         loadingTask.promise.then(pdf => {
           pdfRef.current = pdf;
           setNumPages(pdf.numPages);
@@ -41,7 +44,9 @@ const PdfJsViewer = ({ fileUrl }) => {
       alert('Please upload a valid PDF file.');
     }
   };
+// @ts-expect-error
   const detectQRCode = (canvas) => {
+// @ts-expect-error
     const cv = window.cv
     let src = cv.imread(canvas);
     let qrDecoder = new cv.QRCodeDetector();
@@ -81,13 +86,13 @@ const PdfJsViewer = ({ fileUrl }) => {
           const fontScale = 0.9;
           const color = new cv.Scalar(0, 0, 0, 255);
           const thickness = 2;
-          function estimateTextSize(text, thickness) {
+          function estimateTextSize(text: string, thickness: number) {
             const approxWidth = text.length * 16;
             const approxHeight = 20 + thickness;
             return { width: approxWidth, height: approxHeight };
           }
 
-          const textSize = estimateTextSize(customText, fontScale, thickness);
+          const textSize = estimateTextSize(customText, thickness);
           const textWidth = textSize.width;
           const textHeight = textSize.height;
 
@@ -120,14 +125,17 @@ const PdfJsViewer = ({ fileUrl }) => {
       straightQRCodes.delete();
     }
   };
-
+// @ts-expect-error
   const renderPage = async (pdf, num) => {
     const page = await pdf
       .getPage(num);
     const viewport = page.getViewport({ scale: 1.5 });
     const canvas = canvasRef.current;
+// @ts-expect-error
     const context = canvas.getContext('2d');
+// @ts-expect-error
     canvas.height = viewport.height;
+// @ts-expect-error
     canvas.width = viewport.width;
     const renderContext = {
       canvasContext: context,

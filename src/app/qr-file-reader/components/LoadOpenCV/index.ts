@@ -1,8 +1,9 @@
-
+// @ts-expect-error
 export function loadOpenCv(onloadCallback) {
   const scriptId = 'opencvjs';
 
   if (document.getElementById(scriptId)) {
+// @ts-expect-error
     if (window.cv && window.cv.Mat) {
       onloadCallback();
     }
@@ -15,6 +16,7 @@ export function loadOpenCv(onloadCallback) {
   script.async = true;
   script.onload = () => {
     console.log('OpenCV.js script loaded');
+    // @ts-expect-error
     window.cv['onRuntimeInitialized'] = () => {
       console.log('OpenCV.js runtime initialized');
       onloadCallback();
