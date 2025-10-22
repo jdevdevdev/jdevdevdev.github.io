@@ -130,10 +130,15 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
   const renderPage = async (pdf, num) => {
     const page = await pdf
       .getPage(num);
-    const viewport = page.getViewport({ scale: 1.5 });
+    const viewport = page.getViewport({ scale: 2 });
     const canvas = canvasRef.current;
     // @ts-expect-error todo
     const context = canvas.getContext("2d");
+    const scale = 2;
+    // @ts-expect-error todo
+    canvas.style.width = `${viewport.width / scale}px`;
+    // @ts-expect-error todo
+    canvas.style.height = `${viewport.height / scale}px`;
     // @ts-expect-error todo
     canvas.height = viewport.height;
     // @ts-expect-error todo
