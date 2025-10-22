@@ -130,7 +130,7 @@ const PdfJsViewer = ({ fileUrl }: { fileUrl: string }) => {
   const renderPage = async (pdf, num) => {
     const page = await pdf
       .getPage(num);
-    const viewport = page.getViewport({ scale: 2 });
+    const viewport = page.getViewport({ scale: 5 });
     const canvas = canvasRef.current;
     // @ts-expect-error todo
     const context = canvas.getContext("2d");
